@@ -1,6 +1,6 @@
 # nuitka_uv_reproducer
  
-to reproduce, run `uv run -p 3.12.9 --with greenlet==3.0.0rc3 --with sqlalchemy==1.4.19 --with nuitka nuitka --standalone run_benchmark.py`
+to reproduce, run `uv run -p 3.12.9 --with greenlet==3.0.0rc3 --with sqlalchemy==1.4.19 --with nuitka nuitka --standalone run_benchmark.py` inside the bm_sqlalchemy_imperative folder
 (this will download (if not installed) and use the python-standalone-build python)
 this will create a venv automatically with the dependencies defined automatically, on macos the result is
 ```
