@@ -1,0 +1,29 @@
+---
+name: Main Script
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-main-script:
+    strategy:
+      matrix:
+        os: [ubuntu-latest] #windows-latest currently not supported
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@main
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: echo uv version
+        run: uv --version
+      - name: Install Python 3.12
+        run: uv python install 3.12
+      - name: Run our main script
+        working-directory: bm_sqlalchemy_imperative
+        run: uv run -p 3.12.9 --with greenlet==3.0.0rc3 --with sqlalchemy==1.4.19 --with nuitka nuitka --standalone run_benchmark.py
+                
